@@ -1,14 +1,6 @@
-
-
 Parameters:
-  KeyName:
-    Type: AWS::EC2::KeyPair::KeyName
   vpcID:
     Type: String
-  subnetID:
-    Type: String
-  HostedZoneName:
-    Type: String    
   DBuserName:
     Type: String
   DBpassword:
@@ -18,56 +10,15 @@ Parameters:
   subnetID2:
     Type: String
   subnetID3:
-    Type: String        
+    Type: String    
+  subnetID:
+    Type: String
+  HostedZoneName:
+    Type: String    
+  KeyName:
+    Type: AWS::EC2::KeyPair::KeyName
 Resources:
-  EC2Instance:
-    Type: AWS::EC2::Instance
-    Properties:
-      InstanceType: t2.micro
-      SubnetId: !Ref subnetID
-      SecurityGroupIds:
-      - Ref: WebAppSecurityGroup
-      KeyName:
-        Ref: KeyName
-      ImageId: ami-0ff8a91507f77f867
-  WebAppSecurityGroup:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupDescription: Enable SSH, HTTP and HTTPS
-      VpcId: !Ref vpcID
-      SecurityGroupIngress:
-      - IpProtocol: tcp
-        FromPort: '22'
-        ToPort: '22'
-        CidrIp: 0.0.0.0/0
-      - IpProtocol: tcp
-        FromPort: '80'
-        ToPort: '80'
-        CidrIp: 0.0.0.0/0
-      - IpProtocol: tcp
-        FromPort: '443'
-        ToPort: '443'
-        CidrIp: 0.0.0.0/0
-  IPAddress:
-    Type: AWS::EC2::EIP
-  IPAssoc:
-    Type: AWS::EC2::EIPAssociation
-    Properties:
-      InstanceId:
-        Ref: EC2Instance
-      EIP:
-        Ref: IPAddress
-  myDNSRecord:
-    Type: AWS::Route53::RecordSet
-    Properties:
-      HostedZoneName: !Ref HostedZoneName
-      Comment: DNS name for webApp
-      Name: !Ref HostedZoneName
-      Type: A
-      TTL: '900'
-      ResourceRecords:
-      - !Ref IPAddress
-  S3Bucket:
+  EncryptedS3Bucket:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: 'csye6225-fall2018-chengl.me.csye6225.com'
@@ -115,6 +66,3 @@ Resources:
       DBSubnetGroupName: !Ref myDBSubnetGroup
       VPCSecurityGroups:
       - !Ref DBSecurityGroup
-
-
-
