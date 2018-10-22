@@ -97,7 +97,7 @@ echo "Creating Resource csye6225Subnet1 csye6225Subnet2 csye6225Subnet3......"
 echo "Creating Resource $csye6225InternetGateway........"
 echo "Creating Resource $csye6225RouteTable......."
 
-stackID=$(aws cloudformation create-stack --stack-name $1 --template-body file://$1-csye6225-cf-networking.yml| grep StackId) 
+stackID=$(aws cloudformation create-stack --stack-name $1 --template-body file://csye6225-cf-networking.yml| grep StackId) 
 
 if [ -z "$stackID" ];then 
 	echo "Falied to create stack $1"

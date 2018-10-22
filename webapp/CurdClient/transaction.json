@@ -1,0 +1,17 @@
+	 
+{  
+    "description": "coffee",
+    "merchant": "starbucks",
+    "amount": "2.69",
+    "date": "09/25/2018",
+    "category": "food",
+    "attachments":[
+	    { 
+		"url" : "~/mys3bucket/image1.jpg"
+	    },
+	    {
+                "url" : "~/mys3bucket/image2.jpg"
+	    }
+
+    ]
+}
