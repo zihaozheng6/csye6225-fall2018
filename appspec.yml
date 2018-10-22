@@ -3,7 +3,7 @@ os: linux
 
 files:             
   - source: ./webapp/README.md
-    destination: /tmp
+    destination: /opt
 
 hooks:
   AfterInstall:
