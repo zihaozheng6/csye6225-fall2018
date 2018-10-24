@@ -146,7 +146,7 @@ Resources:
     Properties:
       ApplicationName: !Ref CodeDeployApp
       DeploymentGroupName: "MyCodeDeployGroup"
-      ServiceRoleArn: !GetAtt CodeDeployServiceRole.Arn
+      ServiceRoleArn: !G etAtt CodeDeployServiceRole.Arn
       Ec2TagFilters: 
         - 
           Key: "Name"

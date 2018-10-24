@@ -79,7 +79,7 @@ cat >csye6225-cf.conf<<EOF
 },
 {
  "ParameterKey": "DBuserName",
- "ParameterValue": "root"
+ "ParameterValue": "leo"
 },
 {
  "ParameterKey": "DBpassword",
