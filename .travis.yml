@@ -1,12 +1,16 @@
 language: java
 jdk:
   - oraclejdk8
-
+    
 sudo: false
-
+    
 install: true
-
+    
 script:
+  - pwd
+  - ls -a
+  - echo spring.datasource.url=jdbc:mariadb://${DB_EndPoint}:3306/mysql >> webapp/Csye6225Webapp/src/main/resources/application.properties
+  - cat webapp/Csye6225Webapp/src/main/resources/application.properties
   - pwd
   - ls -a
   - cd webapp/Csye6225Webapp/
@@ -20,7 +24,7 @@ script:
   - cd ../../../
   - pwd
   - ls -a
-
+    
 after_success:
   - pwd
   - ls -al
@@ -36,7 +40,7 @@ after_success:
   - cd ..
   - pwd
   - ls -al
-
+    
 deploy:
   - provider: s3
     local_dir: codedeploy_artifact
@@ -45,7 +49,7 @@ deploy:
     skip_cleanup: true
     access_key_id: $access_key_id
     secret_access_key: $secret_access_key
- 
+    
   - provider: codedeploy
     access_key_id: $access_key_id
     bucket: $s3_bucket
