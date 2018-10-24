@@ -88,6 +88,21 @@ Resources:
       RouteTableId: !Ref $csye6225RouteTable
       DestinationCidrBlock: 0.0.0.0/0
       GatewayId: !Ref $csye6225InternetGateway
+
+Outputs:
+  VPCId:
+    Description: vpcID
+    Value: !Ref $csye6225VPC
+  SubnetID1:
+    Description: SubnetID_1
+    Value: !Ref csye6225Subnet1
+  SubnetID2:
+    Description: SubnetID_2
+    Value: !Ref csye6225Subnet2
+  SubnetID3:
+    Description: SubnetID_3
+    Value: !Ref csye6225Subnet3
+
 EOF
 
 
@@ -124,6 +139,8 @@ do
 done
 
 echo "$1 Stack_Create_Complete !!"
+
+aws cloudformation describe-stacks --stack-name  $1| grep OutputValue
 
 exit 0
 
