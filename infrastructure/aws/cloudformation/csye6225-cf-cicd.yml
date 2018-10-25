@@ -14,27 +14,27 @@ Resources:
       Roles:
       - !Ref EC2ServiceRole 
   
+  
+  CodeDeployPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: CodeDeployPolicy
+      PolicyDocument:
+        Statement:
+        - Effect: Allow
+          Action:
+          - autoscaling:PutLifecycleHook
+          - autoscaling:DeleteLifecycleHook
+          - autoscaling:RecordLifecycleActionHeartbeat
+          - autoscaling:CompleteLifecycleAction
+          - autoscaling:DescribeAutoscalingGroups
+          - autoscaling:PutInstanceInStandby
+          - autoscaling:PutInstanceInService
+          - ec2:Describe*
+          Resource: "*"
+      Roles:
+      - !Ref CodeDeployServiceRole
 
-        #  CodeDeployPolicy:
-        #    Type: AWS::IAM::Policy
-        #    Properties:
-        #      PolicyName: codeDeployPolicy
-        #      PolicyDocument:
-        #        Statement:
-        #        - Effect: Allow
-        #          Action:
-        #          - autoscaling:PutLifecycleHook
-        #          - autoscaling:DeleteLifecycleHook
-        #          - autoscaling:RecordLifecycleActionHeartbeat
-        #          - autoscaling:CompleteLifecycleAction
-        #          - autoscaling:DescribeAutoscalingGroups
-        #          - autoscaling:PutInstanceInStandby
-        #          - autoscaling:PutInstanceInService
-        #          - ec2:Describe*
-        #          Resource: "*"
-        #      Roles:
-        #      - !Ref CodeDeployServiceRole
-        #
 
   TravisUploadToS3:
     Type: AWS::IAM::Policy
@@ -146,7 +146,7 @@ Resources:
     Properties:
       ApplicationName: !Ref CodeDeployApp
       DeploymentGroupName: "MyCodeDeployGroup"
-      ServiceRoleArn: !G etAtt CodeDeployServiceRole.Arn
+      ServiceRoleArn: !GetAtt CodeDeployServiceRole.Arn
       Ec2TagFilters: 
         - 
           Key: "Name"

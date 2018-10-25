@@ -1,4 +1,5 @@
+#!/bin/bash
 
 
 
-echo "application started"
+sudo systemctl start tomcat.service
