@@ -15,25 +15,25 @@ Resources:
       - !Ref EC2ServiceRole 
   
   
-  CodeDeployPolicy:
-    Type: AWS::IAM::Policy
-    Properties:
-      PolicyName: CodeDeployPolicy
-      PolicyDocument:
-        Statement:
-        - Effect: Allow
-          Action:
-          - autoscaling:PutLifecycleHook
-          - autoscaling:DeleteLifecycleHook
-          - autoscaling:RecordLifecycleActionHeartbeat
-          - autoscaling:CompleteLifecycleAction
-          - autoscaling:DescribeAutoscalingGroups
-          - autoscaling:PutInstanceInStandby
-          - autoscaling:PutInstanceInService
-          - ec2:Describe*
-          Resource: "*"
-      Roles:
-      - !Ref CodeDeployServiceRole
+        #  CodeDeployPolicy:
+        #    Type: AWS::IAM::Policy
+        #    Properties:
+        #      PolicyName: CodeDeployPolicy
+        #      PolicyDocument:
+        #        Statement:
+        #        - Effect: Allow
+        #          Action:
+        #          - autoscaling:PutLifecycleHook
+        #          - autoscaling:DeleteLifecycleHook
+        #          - autoscaling:RecordLifecycleActionHeartbeat
+        #          - autoscaling:CompleteLifecycleAction
+        #          - autoscaling:DescribeAutoscalingGroups
+        #          - autoscaling:PutInstanceInStandby
+        #          - autoscaling:PutInstanceInService
+        #          - ec2:Describe*
+        #          Resource: "*"
+        #      Roles:
+        #      - !Ref CodeDeployServiceRole
 
 
   TravisUploadToS3:
@@ -61,7 +61,7 @@ Resources:
           - codedeploy:GetApplicationRevision
           - codedeploy:*
           Resource:
-          - arn:aws:codedeploy:us-east-1:778648864310:application:MyCodeDeployApp
+          - arn:aws:codedeploy:us-east-1:398590284929:application:MyCodeDeployApp
         - Effect: Allow
           Action:
           - codedeploy:CreateDeployment
