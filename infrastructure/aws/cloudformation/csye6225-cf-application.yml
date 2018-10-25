@@ -80,6 +80,10 @@ Resources:
             - "#systemctl enable cloudwatch.service"
             - systemctl enable tomcat.service
             - systemctl start tomcat.service
+            - cd /home/centos/
+            - wget http://aws-codedeploy-us-east-1.s3.amazonaws.com/latest/install
+            - chmod +x ./install 
+            - ./install auto
       IamInstanceProfile: !Ref instanceProfile
       Tags:
         -
