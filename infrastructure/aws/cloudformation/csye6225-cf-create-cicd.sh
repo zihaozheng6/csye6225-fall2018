@@ -118,7 +118,7 @@ cat >csye6225-cf.conf<<EOF
 },
 {
  "ParameterKey": "KeyName",
- "ParameterValue": "csye6225Leo"
+ "ParameterValue": "csye6225"
 },
 {
  "ParameterKey": "HostedZoneName",
