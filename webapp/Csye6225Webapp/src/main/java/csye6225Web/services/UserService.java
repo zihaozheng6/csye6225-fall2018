@@ -6,11 +6,12 @@ import com.amazonaws.services.sns.AmazonSNSClient;
 import com.amazonaws.services.sns.model.PublishRequest;
 import com.amazonaws.services.sns.model.PublishResult;
 import csye6225Web.models.User;
-import csye6225Web.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.support.ResourcePropertySource;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.mindrot.jbcrypt.BCrypt;
+import csye6225Web.repositories.UserRepository;
+
 import java.io.IOException;
 import java.util.UUID;
 
@@ -18,43 +19,14 @@ import java.util.UUID;
 public class UserService {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository repo;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-
-    public boolean userNameExist(String username)
-    {
-        for(User u:userRepository.findAll())
-        {
-            if (u.getUsername().equals(username))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    public void saveUser(String username, String password)
-    {
-        User user= new User();
-        user.setUsername(username);
-        user.setPassword(BCrypt.hashpw(password,BCrypt.gensalt()));
-        userRepository.save(user);
-    }
-
-
-    public boolean userIsValid(String username, String password)
-    {
-        for(User u: userRepository.findAll())
-        {
-            if(u.getUsername().equals(username)&& BCrypt.checkpw(password,u.getPassword()))
-            {
-                return true;
-            }
-        }
-
-        return false;
+    public void save(User user){
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        repo.save(user);
     }
 
 
@@ -85,6 +57,7 @@ public class UserService {
         try
         {
             PublishResult publishResult=snsClient.publish(publishRequest);
+            System.out.println("publish successful");
             System.out.println(publishResult.toString());
 
             return true;
@@ -98,11 +71,5 @@ public class UserService {
 
 
     }
-
-
-
-
-
-
 
 }
